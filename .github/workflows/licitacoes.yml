@@ -1,0 +1,47 @@
+name: Buscar Licitações
+
+on:
+  schedule:
+    # 07h00 Brasília = 10h00 UTC. Segunda a sexta.
+    - cron: "0 10 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Executar robô
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EMAIL_DESTINATARIOS: ${{ secrets.EMAIL_DESTINATARIOS }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m src.main
+
+      - name: Commit do histórico
+        run: |
+          git config user.name "robo-licitacoes"
+          git config user.email "robo@conectar.local"
+          if [[ -n "$(git status --porcelain enviados.json)" ]]; then
+            git add enviados.json
+            git commit -m "chore: atualiza histórico de envios [skip ci]"
+            git push
+          else
+            echo "Nada para commitar."
+          fi

@@ -1,0 +1,94 @@
+# Configurações do robô de licitações da Conectar
+# Edite livremente; mudanças aplicam na próxima execução
+
+# UFs monitoradas. Lista vazia = todas as UFs do Brasil.
+ufs: []
+
+# Modalidades de contratação do PNCP a consultar
+# 4=Concorrência Eletrônica, 6=Pregão Eletrônico, 7=Pregão Presencial,
+# 8=Dispensa, 9=Inexigibilidade, 12=Credenciamento
+modalidades:
+  - 4
+  - 6
+  - 7
+  - 8
+  - 12
+
+# Palavras-chave: se QUALQUER uma aparecer no objeto da contratação, entra.
+# Normalização automática: remove acentos e ignora maiúsculas/minúsculas.
+palavras_chave:
+  # Cabeamento e redes
+  - cabeamento estruturado
+  - cabeamento de rede
+  - rede logica
+  - rede de dados
+  - ponto de rede
+  - cabo utp
+  - cabo cat
+  - patch panel
+  - patch cord
+  - rack
+  - rack 19
+  - mini rack
+
+  # Fibra óptica e telecom
+  - fibra optica
+  - fibra otica
+  - cabo otico
+  - cabo optico
+  - fusao de fibra
+  - ftth
+  - gpon
+  - dio
+  - distribuidor optico
+  - duto telecom
+  - duto de telecomunicacao
+  - dutos para telecomunicacao
+  - rede de telecomunicacao
+  - telecomunicacoes
+
+  # Ativos de rede
+  - switch
+  - switches
+  - roteador
+  - access point
+  - wifi
+  - wi-fi
+  - rede wireless
+
+  # Elétrica
+  - instalacao eletrica
+  - sistema eletrico
+  - quadro eletrico
+  - quadro de distribuicao
+  - projeto eletrico
+  - rede eletrica
+  - eletrocalha
+  - eletroduto
+  - leito para cabos
+  - spda
+  - aterramento
+  - subestacao
+  - grupo gerador
+  - nobreak
+  - no-break
+
+  # CFTV e segurança eletrônica (correlato)
+  - cftv
+  - circuito fechado de tv
+  - cameras de seguranca
+  - controle de acesso
+  - alarme
+
+# Palavras de exclusão: se aparecerem, descarta o edital
+# (mesmo que tenha palavra-chave válida)
+palavras_exclusao:
+  - locacao de veiculo
+  - merenda escolar
+  - material de limpeza
+  - genero alimenticio
+  - medicamento
+  - uniforme escolar
+
+# Valor mínimo para notificar (R$). 0 = sem filtro.
+valor_minimo: 0
